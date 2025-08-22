@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Prueba - Formulario</title>
+
+    <!-- ===== Google Tag (GA4) ===== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+       // Consent Mode v2 (valores por defecto, ajústalos según tu banner de cookies)
+        gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            wait_for_update: 500
+        });
+
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // <-- Reemplaza con tu Measurement ID
+    </script>
+
+    <!-- ===== Meta Pixel Code ===== -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID'); // <-- Reemplaza con tu Pixel ID
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- ===== End Meta Pixel Code ===== -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1d4ed8;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 20px;
+            background: #1d4ed8;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #163ca3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Formulario de Contacto</h1>
+        <form id="contactForm">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- ===== Evento de Lead ===== -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e){
+            e.preventDefault(); // evitamos recargar la página en esta demo
+
+            // GA4: dispara evento generate_lead
+            gtag('event', 'generate_lead');
+
+            // Meta Pixel: dispara evento Lead
+            fbq('track', 'Lead');
+
+            // Simulación de "enviado"
+            alert("¡Formulario enviado! Evento de lead registrado.");
+        });
+    </script>
+</body>
+</html>
